@@ -1,0 +1,8 @@
+{
+    "mssql": {
+        "server": "coderspac3.com",
+        "database": "FaceDetect",
+        "username": "thuan",
+        "password": "1111"
+    }
+}

@@ -11,15 +11,23 @@ from PIL import Image
 import pandas as pd
 import datetime
 import time
+import json
 
 import pyodbc
 # Some other example server values are
 # server = 'localhost\sqlexpress' # for a named instance
 # server = 'myserver,port' # to specify an alternate port
-server = 'DESKTOP-MRGFK0C'
-database = 'FaceDetect'
-username = 'thuanhuynh.190800@gmail.com'
-password = 'Mwg@01634731581'
+
+with open("config.json") as config:
+    data = json.load(config)
+
+mssql = data["mssql"]
+
+server = mssql["server"]
+database = mssql["database"]
+username = mssql["username"]
+password = mssql["password"]
+
 cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
                       server+';DATABASE='+database+';UID='+username+';PWD=' + password)
 cursor = cnxn.cursor()
@@ -35,7 +43,6 @@ cursor.execute("""if not exists (select * from sysobjects where name='Students' 
 print("create table successfully")
 
 ############################################# FUNCTIONS ################################################
-
 
 def assure_path_exists(path):
     dir = os.path.dirname(path)
