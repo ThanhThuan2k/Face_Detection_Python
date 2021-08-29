@@ -22,9 +22,17 @@ password = 'Mwg@01634731581'
 cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
 cursor = cnxn.cursor()
 
-cursor.execute("""
-INSERT INTO Students (Name, Date) 
-VALUES (?,?)""", 'Thanh Thuan', '12/9/2021 9:54')
+cursor.execute("""CREATE TABLE Students 
+(
+	Id int identity(1,1),
+	[Name] nvarchar(500),
+	[Date] nvarchar(100)
+);""")
+print("create table successfully")
+
+# cursor.execute("""
+# INSERT INTO Students (Name, Date) 
+# VALUES (?,?)""", 'Thanh Thuan', '12/9/2021 9:54')
 
 cnxn.commit()
 print("insert success")
@@ -329,6 +337,7 @@ def TrackImages():
             writer = csv.writer(csvFile1)
             writer.writerow(attendance)
         csvFile1.close()
+        
     else:
         with open("Attendance\Attendance_" + date + ".csv", 'a+') as csvFile1:
             writer = csv.writer(csvFile1)
