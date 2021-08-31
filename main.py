@@ -72,8 +72,8 @@ def check_haarcascadefile():
     if exists:
         pass
     else:
-        mess._show(title='Some file missing',
-                   message='Please contact us for help')
+        mess._show(title='Một số file yêu cầu bị lỗi, vui lòng kiểm tra',
+                   message='Vui lòng liên hệ để được hỗ trợ')
         window.destroy()
 
 ###################################################################################
@@ -87,16 +87,16 @@ def save_pass():
         key = tf.read()
     else:
         master.destroy()
-        new_pas = tsd.askstring('Old Password not found',
-                                'Please enter a new password below', show='*')
+        new_pas = tsd.askstring('Mật khẩu cũ không được để trống',
+                                'Vui lòng nhập mật khẩu mới', show='*')
         if new_pas == None:
-            mess._show(title='No Password Entered',
-                       message='Password not set!! Please try again')
+            mess._show(title='Không có mật khẩu nào được nhập',
+                       message='Vui lòng thử lại')
         else:
             tf = open("TrainingImageLabel\psd.txt", "w")
             tf.write(new_pas)
-            mess._show(title='Password Registered',
-                       message='New password was registered successfully!!')
+            mess._show(title='Đổi mật khẩu',
+                       message='Đổi thành công!!')
             return
     op = (old.get())
     newp = (new.get())
@@ -106,14 +106,14 @@ def save_pass():
             txf = open("TrainingImageLabel\psd.txt", "w")
             txf.write(newp)
         else:
-            mess._show(title='Error', message='Confirm new password again!!!')
+            mess._show(title='Lỗi', message='Nhập lại mật khẩu!!!')
             return
     else:
         mess._show(title='Wrong Password',
-                   message='Please enter correct old password.')
+                   message='Mật khẩu cũ sai.')
         return
     mess._show(title='Password Changed',
-               message='Password changed successfully!!')
+               message='Đổi thành công!!')
     master.destroy()
 
 ###################################################################################
@@ -126,21 +126,21 @@ def change_pass():
     master.resizable(False, False)
     master.title("Change Password")
     master.configure(background="white")
-    lbl4 = tk.Label(master, text='    Enter Old Password',
+    lbl4 = tk.Label(master, text='    Nhập mật khẩu mới',
                     bg='white', font=('times', 12, ' bold '))
     lbl4.place(x=10, y=10)
     global old
     old = tk.Entry(master, width=25, fg="black", relief='solid',
                    font=('times', 12, ' bold '), show='*')
     old.place(x=180, y=10)
-    lbl5 = tk.Label(master, text='   Enter New Password',
+    lbl5 = tk.Label(master, text='   Nhập mật khẩu mới',
                     bg='white', font=('times', 12, ' bold '))
     lbl5.place(x=10, y=45)
     global new
     new = tk.Entry(master, width=25, fg="black", relief='solid',
                    font=('times', 12, ' bold '), show='*')
     new.place(x=180, y=45)
-    lbl6 = tk.Label(master, text='Confirm New Password',
+    lbl6 = tk.Label(master, text='Nhập lại mật khẩu mới',
                     bg='white', font=('times', 12, ' bold '))
     lbl6.place(x=10, y=80)
     global nnew
@@ -165,16 +165,16 @@ def psw():
         tf = open("TrainingImageLabel\psd.txt", "r")
         key = tf.read()
     else:
-        new_pas = tsd.askstring('Old Password not found',
-                                'Please enter a new password below', show='*')
+        new_pas = tsd.askstring('Không tìm thấy mật khẩu cũ',
+                                'Vui lòng nhập lại mật khẩu cũ', show='*')
         if new_pas == None:
-            mess._show(title='No Password Entered',
-                       message='Password not set!! Please try again')
+            mess._show(title='Không có mật khẩu nào được nhập',
+                       message='Mật khẩu mới trống')
         else:
             tf = open("TrainingImageLabel\psd.txt", "w")
             tf.write(new_pas)
             mess._show(title='Password Registered',
-                       message='New password was registered successfully!!')
+                       message='Cập nhật mật khẩu mới thành công!!')
             return
     password = tsd.askstring('Password', 'Enter Password', show='*')
     if (password == key):
@@ -182,21 +182,21 @@ def psw():
     elif (password == None):
         pass
     else:
-        mess._show(title='Wrong Password',
-                   message='You have entered wrong password')
+        mess._show(title='Sai mật khẩu',
+                   message='Bạn đã nhập sai mật khẩu')
 
 ######################################################################################
 
 
 def clear():
     txt.delete(0, 'end')
-    res = "1)Take Images  >>>  2)Save Profile"
+    res = "Xin chụp ảnh trước khi điểm danh nếu bạn chưa chụp trước đây"
     message1.configure(text=res)
 
 
 def clear2():
     txt2.delete(0, 'end')
-    res = "1)Take Images  >>>  2)Save Profile"
+    res = "1)Chụp ảnh  >>>  2)Lưu thông tin"
     message1.configure(text=res)
 
 #######################################################################################
@@ -275,13 +275,13 @@ def TrainImages():
     try:
         recognizer.train(faces, np.array(ID))
     except:
-        mess._show(title='No Registrations',
-                   message='Please Register someone first!!!')
+        mess._show(title='Chưa có ai đăng kí',
+                   message='Vui lòng đăng kí trước khi điểm danh!!!')
         return
     recognizer.save("TrainingImageLabel\Trainner.yml")
-    res = "Profile Saved Successfully"
+    res = "Lưu thông tin thành công"
     message1.configure(text=res)
-    message.configure(text='Total Registrations till now  : ' + str(ID[0]))
+    message.configure(text='Tổng số đã đăng kí: ' + str(ID[0]))
 
 # 3
 
@@ -324,7 +324,7 @@ def TrackImages():
         recognizer.read("TrainingImageLabel\Trainner.yml")
     else:
         mess._show(title='Data Missing',
-                   message='Please click on Save Profile to reset data!!')
+                   message='Nhấn Lưu thông tin để đặt lại!!')
         return
     harcascadePath = "haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(harcascadePath)
@@ -337,7 +337,7 @@ def TrackImages():
         df = pd.read_csv("StudentDetails\StudentDetails.csv")
     else:
         mess._show(title='Details Missing',
-                   message='Students details are missing, please check!')
+                   message='Thông tin chưa đủ')
         cam.release()
         cv2.destroyAllWindows()
         window.destroy()
@@ -366,7 +366,7 @@ def TrackImages():
                 Id = 'Unknown'
                 bb = str(Id)
             cv2.putText(im, str(bb), (x, y + h), font, 1, (255, 255, 255), 2)
-        cv2.imshow('Taking Attendance', im)
+        cv2.imshow('Điểm danh', im)
         if (cv2.waitKey(1) == ord('q')):
             break
     ts = time.time()
@@ -446,7 +446,7 @@ frame1.place(relx=0.11, rely=0.17, relwidth=0.39, relheight=0.80)
 frame2 = tk.Frame(window, bg="#00aeff")
 frame2.place(relx=0.51, rely=0.17, relwidth=0.38, relheight=0.80)
 
-message3 = tk.Label(window, text="Face Recognition Based Attendance System" , fg="white",bg="#262523" ,width=55 ,height=1,font=('times', 29, ' bold '))
+message3 = tk.Label(window, text="Hệ thống điểm danh bằng nhận diện khuôn mặt" , fg="white",bg="#262523" ,width=55 ,height=1,font=('times', 29, ' bold '))
 message3.place(x=10, y=10)
 
 frame3 = tk.Frame(window, bg="#c4c6ce")
@@ -462,31 +462,31 @@ clock = tk.Label(frame3, fg="orange",bg="#262523" ,width=55 ,height=1,font=('tim
 clock.pack(fill='both', expand=1)
 tick()
 
-head2 = tk.Label(frame2, text="                       For New Registrations                       ", fg="black", bg="#3ece48" ,font=('times', 17, ' bold ') )
+head2 = tk.Label(frame2, text="                       Tạo mới thông tin                       ", fg="black", bg="#3ece48" ,font=('times', 17, ' bold ') )
 head2.grid(row=0, column=0)
 
-head1 = tk.Label(frame1, text="                       For Already Registered                       ", fg="black", bg="#3ece48" ,font=('times', 17, ' bold ') )
+head1 = tk.Label(frame1, text="                       Đã đăng kí                       ", fg="black", bg="#3ece48" ,font=('times', 17, ' bold ') )
 head1.place(x=0, y=0)
 
-lbl = tk.Label(frame2, text="Enter ID", width=20  ,height=1  ,fg="black"  ,bg="#00aeff" ,font=('times', 17, ' bold ') )
+lbl = tk.Label(frame2, text="ID", width=20  ,height=1  ,fg="black"  ,bg="#00aeff" ,font=('times', 17, ' bold ') )
 lbl.place(x=80, y=55)
 
 txt = tk.Entry(frame2, width=32 ,fg="black",font=('times', 15, ' bold '))
 txt.place(x=30, y=88)
 
-lbl2 = tk.Label(frame2, text="Enter Name", width=20  ,fg="black"  ,bg="#00aeff" ,font=('times', 17, ' bold '))
+lbl2 = tk.Label(frame2, text="Họ và tên", width=20  ,fg="black"  ,bg="#00aeff" ,font=('times', 17, ' bold '))
 lbl2.place(x=80, y=140)
 
 txt2 = tk.Entry(frame2, width=32 ,fg="black",font=('times', 15, ' bold ')  )
 txt2.place(x=30, y=173)
 
-message1 = tk.Label(frame2, text="1)Take Images  >>>  2)Save Profile" , bg="#00aeff" ,fg="black"  ,width=39 ,height=1, activebackground = "yellow" ,font=('times', 15, ' bold '))
+message1 = tk.Label(frame2, text="Vui lòng chụp ảnh trước khi điểm danh" , bg="#00aeff" ,fg="black"  ,width=39 ,height=1, activebackground = "yellow" ,font=('times', 15, ' bold '))
 message1.place(x=7, y=230)
 
 message = tk.Label(frame2, text="" , bg="#00aeff" ,fg="black"  ,width=39,height=1, activebackground = "yellow" ,font=('times', 16, ' bold '))
 message.place(x=7, y=450)
 
-lbl3 = tk.Label(frame1, text="Attendance", width=20  ,fg="black"  ,bg="#00aeff"  ,height=1 ,font=('times', 17, ' bold '))
+lbl3 = tk.Label(frame1, text="Điểm danh", width=20  ,fg="black"  ,bg="#00aeff"  ,height=1 ,font=('times', 17, ' bold '))
 lbl3.place(x=100, y=115)
 
 res = 0
@@ -500,15 +500,15 @@ if exists:
     csvFile1.close()
 else:
     res = 0
-message.configure(text='Total Registrations till now  : '+str(res))
+message.configure(text='Tổng số học sinh : '+str(res))
 
 ##################### MENUBAR #################################
 
 menubar = tk.Menu(window, relief='ridge')
 filemenu = tk.Menu(menubar, tearoff=0)
-filemenu.add_command(label='Change Password', command= change_pass)
-filemenu.add_command(label='Contact Us', command= contact)
-filemenu.add_command(label='Exit', command = window.destroy)
+filemenu.add_command(label='Đổi mật khẩu', command= change_pass)
+filemenu.add_command(label='Liên hệ', command= contact)
+filemenu.add_command(label='Thoát', command = window.destroy)
 menubar.add_cascade(label='Help', font=('times', 29, ' bold '),menu=filemenu)
 
 ################## TREEVIEW ATTENDANCE TABLE ####################
@@ -520,9 +520,9 @@ tv.column('date', width=133)
 tv.column('time', width=133)
 tv.grid(row=2, column=0,padx=(0,0),pady=(150,0),columnspan=4)
 tv.heading('#0', text ='ID')
-tv.heading('name', text ='NAME')
-tv.heading('date', text ='DATE')
-tv.heading('time', text ='TIME')
+tv.heading('name', text ='Tên')
+tv.heading('date', text ='Ngày')
+tv.heading('time', text ='Giờ')
 
 ###################### SCROLLBAR ################################
 
@@ -532,17 +532,17 @@ tv.configure(yscrollcommand=scroll.set)
 
 ###################### BUTTONS ##################################
 
-clearButton = tk.Button(frame2, text="Clear", command=clear  , fg="black"  ,bg="#ea2a2a"  ,width=11 ,activebackground = "white" ,font=('times', 11, ' bold '))
+clearButton = tk.Button(frame2, text="Xóa", command=clear  , fg="black"  ,bg="#ea2a2a"  ,width=11 ,activebackground = "white" ,font=('times', 11, ' bold '))
 clearButton.place(x=335, y=86)
-clearButton2 = tk.Button(frame2, text="Clear", command=clear2  , fg="black"  ,bg="#ea2a2a"  ,width=11 , activebackground = "white" ,font=('times', 11, ' bold '))
+clearButton2 = tk.Button(frame2, text="Xóa", command=clear2  , fg="black"  ,bg="#ea2a2a"  ,width=11 , activebackground = "white" ,font=('times', 11, ' bold '))
 clearButton2.place(x=335, y=172)
-takeImg = tk.Button(frame2, text="Take Images", command=TakeImages  , fg="white"  ,bg="blue"  ,width=34  ,height=1, activebackground = "white" ,font=('times', 15, ' bold '))
+takeImg = tk.Button(frame2, text="Chụp ảnh", command=TakeImages  , fg="white"  ,bg="blue"  ,width=34  ,height=1, activebackground = "white" ,font=('times', 15, ' bold '))
 takeImg.place(x=30, y=300)
-trainImg = tk.Button(frame2, text="Save Profile", command=psw , fg="white"  ,bg="blue"  ,width=34  ,height=1, activebackground = "white" ,font=('times', 15, ' bold '))
+trainImg = tk.Button(frame2, text="Lưu ảnh", command=psw , fg="white"  ,bg="blue"  ,width=34  ,height=1, activebackground = "white" ,font=('times', 15, ' bold '))
 trainImg.place(x=30, y=380)
-trackImg = tk.Button(frame1, text="Take Attendance", command=TrackImages  , fg="black"  ,bg="yellow"  ,width=35  ,height=1, activebackground = "white" ,font=('times', 15, ' bold '))
+trackImg = tk.Button(frame1, text="Điểm danh", command=TrackImages  , fg="black"  ,bg="yellow"  ,width=35  ,height=1, activebackground = "white" ,font=('times', 15, ' bold '))
 trackImg.place(x=30, y=50)
-quitWindow = tk.Button(frame1, text="Quit", command=window.destroy  , fg="black"  ,bg="red"  ,width=35 ,height=1, activebackground = "white" ,font=('times', 15, ' bold '))
+quitWindow = tk.Button(frame1, text="Thoát", command=window.destroy  , fg="black"  ,bg="red"  ,width=35 ,height=1, activebackground = "white" ,font=('times', 15, ' bold '))
 quitWindow.place(x=30, y=450)
 
 ##################### END ######################################
